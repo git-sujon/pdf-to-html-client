@@ -10,7 +10,18 @@ const ApplyForPosition = () => {
   return (
     <div>
       {/* apply position  */}
-     
+      <div className="w-2/5 mx-auto my-20 space-y-4">
+        {/* Login Button */}
+        <div>
+          <LoginAndLogoutButton></LoginAndLogoutButton>
+        </div>
+        <div className="">
+          <h2 className="text-2xl text-red-500 font-semibold">
+            Apply for Position
+          </h2>
+        </div>
+ 
+      </div>
     </div>
   );
 };
