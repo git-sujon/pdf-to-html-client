@@ -2,10 +2,33 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import LoginAndLogoutButton from "../../components/LoginAndLogoutButton/LoginAndLogoutButton";
 
 const ApplyForPosition = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const {
+    register,
+    handleSubmit,
+    reset,
+
+    formState: { errors },
+  } = useForm();
+
+  const skills = [
+    "PHP",
+    "Python",
+    "SQL",
+    "CSS",
+    "HTML5",
+    "JavaScript",
+    "React",
+  ];
+
+  const formHandler = (event) => {
+  console.log(event)
+
+  }
 
   return (
     <div>
@@ -20,7 +43,7 @@ const ApplyForPosition = () => {
             Apply for Position
           </h2>
         </div>
-        <form className="space-y-4">
+        <form onSubmit={handleSubmit(formHandler)} className="space-y-4">
           {/* Name  */}
           <div className="flex items-center justify-between ">
             <label
@@ -33,7 +56,7 @@ const ApplyForPosition = () => {
             <input
               type="text"
               id="UserName"
-              name="name"
+              {...register("name")}
               defaultValue={user?.name}
               required
               placeholder="Type your full name"
@@ -53,7 +76,7 @@ const ApplyForPosition = () => {
             <input
               type="email"
               id="UserEmail"
-              name="email"
+              {...register("email")}
               defaultValue={user?.email}
               required
               placeholder="Type your full name"
@@ -72,7 +95,7 @@ const ApplyForPosition = () => {
             <input
               type="tel"
               id="UserPhone"
-              name="phone"
+              {...register("phone")}
               required
               placeholder="Type a valid number e.g 01812345678"
               className="mt-1  rounded-md block w-4/5 border-2 border-gray-300 shadow-sm sm:text-sm py-2 px-2"
@@ -88,9 +111,9 @@ const ApplyForPosition = () => {
             </label>
 
             <input
-               type="url"
+              type="url"
               id="UserLinkedin"
-              name="linkedin"
+              {...register("linkedin")}
               required
               placeholder="Paste Your Linkedin profile"
               className="mt-1  rounded-md block w-4/5 border-2 border-gray-300 shadow-sm sm:text-sm py-2 px-2"
@@ -104,23 +127,24 @@ const ApplyForPosition = () => {
             </h4>
 
             {/* select tag  */}
-            <div className="flex items-center ">
-              <input
-                type="checkbox"
-                id="PHP"
-                name="PHP"
-                className=" border-gray-300 bg-white shadow-sm"
-              />
-              <span className="text-sm font-semibold  text-gray-700   ml-2">
-                PHP
-              </span>
-            </div>
-            
+            {skills.map((skill, idx) => (
+              <div key={idx} className="flex items-center mt-3">
+                <input
+                  type="checkbox"
+                  id="PHP"
+                  {...register(`${skill}`)}
+                  className=" border-gray-300 bg-white "
+                />
+                <label className="text-sm font-semibold  text-gray-700 block   ml-2">
+                  {skill}
+                </label>
+              </div>
+            ))}
           </div>
 
-            {/* CV Upload  */}
-      
-            <div className="flex items-center  ">
+          {/* CV Upload  */}
+
+          <div className="flex items-center  ">
             <label
               htmlFor="UserLinkedin"
               className="block text-sm font-semibold  text-gray-700  "
@@ -133,20 +157,15 @@ const ApplyForPosition = () => {
               id="uploadCV"
               name="uploadCV"
               required
-            
               className="mt-1 font-semibold hide text-white shadow-sm sm:text-sm py-2 px-2"
             />
           </div>
 
-
-          <button
-      
-        className="flex items-center justify-between  border border-red-400 bg-red-400 px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring mx-auto"
-
-      >
-        <span className="text-sm font-medium text-white hover:text-black "> Apply With Linkedin</span>
-      </button>
-
+          <div className="mt-10">
+            <button type="submit" className="md:w-1/2 block text-center mx-auto border border-red-400 bg-red-400 text-sm font-medium text-white hover:text-black  px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring ">
+          Preview
+          </button>
+          </div>
         </form>
       </div>
     </div>
