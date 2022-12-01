@@ -26,7 +26,23 @@ const ApplyForPosition = () => {
   ];
 
   const formHandler = (event) => {
-  console.log(event)
+    const cvFile= event.uploadCV
+ 
+   const userInfo=  {
+        name: user?.name,
+        email: user?.email,
+        phone: event.phone,
+        linkedin: event.linkedin,
+        PHP: event.PHP,
+        Python: event.Python,
+        SQL: event.SQL,
+        CSS: event.CSS,
+        HTML5: event.HTML5,
+        JavaScript: event.JavaScript,
+        React: event.React,
+        uploadCV: event.uploadCV[0],
+    }
+    console.log(cvFile)
 
   }
 
@@ -155,7 +171,7 @@ const ApplyForPosition = () => {
             <input
               type="file"
               id="uploadCV"
-              name="uploadCV"
+              {...register("uploadCV")}
               required
               className="mt-1 font-semibold hide text-white shadow-sm sm:text-sm py-2 px-2"
             />
