@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import LoginAndLogoutButton from "../../components/LoginAndLogoutButton/LoginAndLogoutButton";
+import ViewDetails from "../ViewDetails/ViewDetails";
+import  './ApplyForPosition.css'
 
 const ApplyForPosition = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -47,9 +49,9 @@ const ApplyForPosition = () => {
   }
 
   return (
-    <div>
+    <div className="w-2/5 mx-auto my-20">
       {/* apply position  */}
-      <div className="w-2/5 mx-auto my-20 space-y-4">
+      <div className=" space-y-4">
         {/* Login Button */}
         <div>
           <LoginAndLogoutButton></LoginAndLogoutButton>
@@ -64,7 +66,7 @@ const ApplyForPosition = () => {
           <div className="flex items-center justify-between ">
             <label
               htmlFor="UserName"
-              className="block text-sm font-semibold  text-gray-700  "
+              className="block asterisk text-sm font-semibold  text-gray-700  "
             >
               Name
             </label>
@@ -76,7 +78,7 @@ const ApplyForPosition = () => {
               defaultValue={user?.name}
               required
               placeholder="Type your full name"
-              className="mt-1  rounded-md block w-4/5 border-2 border-gray-300 shadow-sm sm:text-sm py-2 px-2"
+              className="mt-1   rounded-md block w-4/5 border-2 border-gray-300 shadow-sm sm:text-sm py-2 px-2"
             />
           </div>
 
@@ -84,7 +86,7 @@ const ApplyForPosition = () => {
           <div className="flex items-center justify-between ">
             <label
               htmlFor="UserEmail"
-              className="block text-sm font-semibold  text-gray-700  "
+              className="block asterisk text-sm font-semibold  text-gray-700  "
             >
               Email
             </label>
@@ -103,7 +105,7 @@ const ApplyForPosition = () => {
           <div className="flex items-center justify-between ">
             <label
               htmlFor="UserPhone"
-              className="block text-sm font-semibold  text-gray-700  "
+              className="block asterisk  text-sm font-semibold  text-gray-700  "
             >
               Phone
             </label>
@@ -121,7 +123,7 @@ const ApplyForPosition = () => {
           <div className="flex items-center justify-between ">
             <label
               htmlFor="UserLinkedin"
-              className="block text-sm font-semibold  text-gray-700  "
+              className="block asterisk text-sm font-semibold  text-gray-700  "
             >
               Linkedin
             </label>
@@ -137,10 +139,10 @@ const ApplyForPosition = () => {
           </div>
 
           <div>
-            <h4>
-              Select Your Skill{" "}
-              <span>(You have to select a minimum of one skill to submit)</span>{" "}
-            </h4>
+            <div className="flex text-gray-600">
+            <h4 className="asterisk  font-medium">
+              Select Your Skill</h4> <p className="font-medium text-normal"> (You have to select a minimum of one skill to submit)</p>
+            </div>
 
             {/* select tag  */}
             {skills.map((skill, idx) => (
@@ -177,12 +179,16 @@ const ApplyForPosition = () => {
             />
           </div>
 
-          <div className="mt-10">
+          <div className="mt-20">
             <button type="submit" className="md:w-1/2 block text-center mx-auto border border-red-400 bg-red-400 text-sm font-medium text-white hover:text-black  px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring ">
           Preview
           </button>
           </div>
         </form>
+      </div>
+      {/* show profile and Skill section  */}
+      <div className="mt-20">
+      <ViewDetails></ViewDetails>
       </div>
     </div>
   );
