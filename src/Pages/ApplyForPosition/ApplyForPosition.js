@@ -10,7 +10,7 @@ import  './ApplyForPosition.css'
 
 const ApplyForPosition = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [open, setOpen ] = useState(false)
+  const [open, setOpen ] = useState(true)
   const [userDetails, setUserDetails] = useState({})
   const {
     register,
@@ -74,7 +74,7 @@ event.React && 'React',
     //   })
     // }
 
- 
+    setOpen(false)
 
 
   }
@@ -84,7 +84,8 @@ event.React && 'React',
   }
 
   return (
-    <div className="w-2/5 mx-auto my-20">
+   <div>
+     <div className="w-2/5 mx-auto my-20">
       {/* apply position  */}
       <div className=" space-y-4">
         {/* Login Button */}
@@ -220,13 +221,14 @@ event.React && 'React',
           </button>
           </div>
         </form>
-       
       </div>
-      {/* show profile and Skill section  */}
-      <div className={`${open ? ' fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto' : '' }  mt-20`}>
+      
+    </div>
+  {/* show profile and Skill section  */}
+      <div className={`${open ? ' hidden ' : 'fixed  z-50 inset-0  bg-gray-900 bg-opacity-60 h-full   ' }  `}>
       <ViewDetails userDetails={userDetails}></ViewDetails>
       </div>
-    </div>
+   </div>
   );
 };
 
