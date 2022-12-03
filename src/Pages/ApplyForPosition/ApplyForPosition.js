@@ -10,6 +10,7 @@ import "./ApplyForPosition.css";
 
 const ApplyForPosition = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(user)
   const [open, setOpen] = useState(true);
   const [userDetails, setUserDetails] = useState({});
   const {
@@ -54,7 +55,7 @@ const ApplyForPosition = () => {
     setUserDetails(userInfo);
 
     if(user &&  userInfo) {
-      fetch(`https://pdf-to-html-server-git-sujon.vercel.app/usersInfo`, {
+      fetch(`http://localhost:5000/usersInfo`, {
         method:'POST',
         headers:{
           "content-type" : "application/json"
