@@ -6,9 +6,9 @@ const ProfileSection = () => {
     
 
   return (
-    <div className="border text-gray-600">
-      <div class="flex justify-center">
-        <div class="block rounded-lg shadow-lg bg-white max-w-sm text-center">
+    <div className=" text-gray-700 h-44 border">
+      <div className="flex justify-center">
+        <div className="block  bg-white max-w-sm text-center">
             <div>
                 <img src="https://resumespice.com/wp-content/uploads/2021/03/38.png" alt="" />
             </div>

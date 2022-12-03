@@ -3,12 +3,15 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import Loader from "../../components/Loader/Loader";
 import LoginAndLogoutButton from "../../components/LoginAndLogoutButton/LoginAndLogoutButton";
 import ViewDetails from "../ViewDetails/ViewDetails";
 import  './ApplyForPosition.css'
 
 const ApplyForPosition = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [open, setOpen ] = useState(false)
+  const [userDetails, setUserDetails] = useState({})
   const {
     register,
     handleSubmit,
@@ -28,24 +31,56 @@ const ApplyForPosition = () => {
   ];
 
   const formHandler = (event) => {
-    const cvFile= event.uploadCV
- 
+
+
+    let skills={}
    const userInfo=  {
         name: user?.name,
         email: user?.email,
         phone: event.phone,
         linkedin: event.linkedin,
-        PHP: event.PHP,
-        Python: event.Python,
-        SQL: event.SQL,
-        CSS: event.CSS,
-        HTML5: event.HTML5,
-        JavaScript: event.JavaScript,
-        React: event.React,
+
+        skills : [
+       event.PHP && 'PHP',
+         event.Python && 'Python',
+      event.SQL && "SQL",
+     event.CSS && 'CSS',
+    event.HTML5 && 'HTML5',
+        event.JavaScript && 'JavaScript',
+event.React && 'React',
+        ],
+
+       
         uploadCV: event.uploadCV[0],
     }
-    console.log(cvFile)
 
+   
+
+    setUserDetails(userInfo)
+
+
+    // if(user &&  userInfo) {
+    //   fetch(`http://localhost:5000/usersInfo`, {
+    //     method:'POST',
+    //     headers:{
+    //       "content-type" : "application/json"
+    //     },
+    //     body: JSON.stringify(userInfo)
+    //   })
+    //   .then(res=> res.json())
+    //   .then(data=> {
+    //     console.log(data)
+    //     setOpen(false)
+    //   })
+    // }
+
+ 
+
+
+  }
+
+  if (isLoading){
+    return <Loader></Loader>
   }
 
   return (
@@ -149,7 +184,7 @@ const ApplyForPosition = () => {
               <div key={idx} className="flex items-center mt-3">
                 <input
                   type="checkbox"
-                  id="PHP"
+               
                   {...register(`${skill}`)}
                   className=" border-gray-300 bg-white "
                 />
@@ -179,16 +214,17 @@ const ApplyForPosition = () => {
             />
           </div>
 
-          <div className="mt-20">
+          <div className="mt-20" >
             <button type="submit" className="md:w-1/2 block text-center mx-auto border border-red-400 bg-red-400 text-sm font-medium text-white hover:text-black  px-5 py-3 transition-colors hover:bg-transparent focus:outline-none focus:ring ">
           Preview
           </button>
           </div>
         </form>
+       
       </div>
       {/* show profile and Skill section  */}
-      <div className="mt-20">
-      <ViewDetails></ViewDetails>
+      <div className={`${open ? ' fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto' : '' }  mt-20`}>
+      <ViewDetails userDetails={userDetails}></ViewDetails>
       </div>
     </div>
   );
