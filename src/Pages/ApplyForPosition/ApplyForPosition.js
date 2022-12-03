@@ -54,7 +54,7 @@ const ApplyForPosition = () => {
     setUserDetails(userInfo);
 
     if(user &&  userInfo) {
-      fetch(`http://localhost:5000/usersInfo`, {
+      fetch(`https://pdf-to-html-server-git-sujon.vercel.app/usersInfo`, {
         method:'POST',
         headers:{
           "content-type" : "application/json"
